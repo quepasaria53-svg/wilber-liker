@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WILBER LIKER</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#090909;
+  color:white;
+  font-family:Arial,sans-serif;
+  text-align:center;
+}
+header{
+  padding:28px 10px;
+  background:#160609;
+  border-bottom:2px solid #ff1744;
+}
+h1{color:#ff1744;font-size:34px}
+main{
+  max-width:430px;
+  margin:35px auto;
+  padding:22px;
+}
+.panel{
+  background:#191919;
+  padding:22px;
+  border-radius:16px;
+  border:1px solid #a31530;
+}
+input,select,button{
+  width:100%;
+  padding:15px;
+  margin:12px 0;
+  border-radius:9px;
+  border:0;
+  font-size:15px;
+}
+input,select{
+  background:#292929;
+  color:white;
+}
+button{
+  background:#e50935;
+  color:white;
+  font-weight:bold;
+}
+button:active{opacity:.7}
+.counter{
+  color:#ff1744;
+  font-size:40px;
+  font-weight:bold;
+}
+#status{color:#aaa}
+footer{color:#777;font-size:12px;margin-top:30px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>WILBER LIKER</h1>
+<p>TIKTOK VIEWS PANEL</p>
+</header>
+
+<main>
+<div class="panel">
+<h2>Panel de visualizaciones</h2>
+
+<input id="link" type="url"
+value="https://vm.tiktok.com/ZN8mcCvBD/"
+placeholder="Enlace de TikTok">
+
+<select id="cantidad">
+<option value="100">100 vistas</option>
+<option value="500">500 vistas</option>
+<option value="1000" selected>1000 vistas</option>
+</select>
+
+<button onclick="simular()">
+INICIAR SIMULACIÓN
+</button>
+
+<p>Visualizaciones simuladas</p>
+<div class="counter" id="contador">0</div>
+<p id="status">Esperando solicitud...</p>
+</div>
+
+<footer>
+WILBER LIKER © 2026<br>
+Demostración: no genera visitas reales.
+</footer>
+</main>
+
+<script>
+function simular(){
+ const link=document.getElementById("link").value;
+ const cantidad=Number(document.getElementById("cantidad").value);
+ const contador=document.getElementById("contador");
+ const status=document.getElementById("status");
+
+ if(!link.startsWith("https://")){
+   status.textContent="Introduce un enlace válido.";
+   return;
+ }
+
+ contador.textContent=Number(cantidad).toLocaleString("es-ES");
+ status.textContent="Simulación completada. No se enviaron visitas reales.";
+}
+</script>
+
+</body>
+</html>
