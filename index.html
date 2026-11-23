@@ -1,114 +1,71 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>WILBER LIKER</title>
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  background:#090909;
-  color:white;
-  font-family:Arial,sans-serif;
-  text-align:center;
-}
-header{
-  padding:28px 10px;
-  background:#160609;
-  border-bottom:2px solid #ff1744;
-}
-h1{color:#ff1744;font-size:34px}
-main{
-  max-width:430px;
-  margin:35px auto;
-  padding:22px;
-}
-.panel{
-  background:#191919;
-  padding:22px;
-  border-radius:16px;
-  border:1px solid #a31530;
-}
-input,select,button{
-  width:100%;
-  padding:15px;
-  margin:12px 0;
-  border-radius:9px;
-  border:0;
-  font-size:15px;
-}
-input,select{
-  background:#292929;
-  color:white;
-}
-button{
-  background:#e50935;
-  color:white;
-  font-weight:bold;
-}
-button:active{opacity:.7}
-.counter{
-  color:#ff1744;
-  font-size:40px;
-  font-weight:bold;
-}
-#status{color:#aaa}
-footer{color:#777;font-size:12px;margin-top:30px}
+body{background:#090909;color:white;font-family:Arial;text-align:center;margin:0}
+header{background:#190609;padding:20px;border-bottom:2px solid #f14}
+h1{color:#ff1744}
+main{max-width:430px;margin:25px auto;padding:15px}
+.panel{background:#1b1b1b;padding:20px;border-radius:15px;border:1px solid #f14;margin-bottom:15px}
+input,button{width:100%;padding:14px;margin:8px 0;border:0;border-radius:8px;box-sizing:border-box}
+input{background:#303030;color:white}
+button{background:#e50935;color:white;font-weight:bold}
+small{color:#aaa}
 </style>
 </head>
 <body>
-
 <header>
 <h1>WILBER LIKER</h1>
-<p>TIKTOK VIEWS PANEL</p>
+<p>Panel de usuarios</p>
 </header>
-
 <main>
 <div class="panel">
-<h2>Panel de visualizaciones</h2>
-
-<input id="link" type="url"
-value="https://vm.tiktok.com/ZN8mcCvBD/"
-placeholder="Enlace de TikTok">
-
-<select id="cantidad">
-<option value="100">100 vistas</option>
-<option value="500">500 vistas</option>
-<option value="1000" selected>1000 vistas</option>
-</select>
-
-<button onclick="simular()">
-INICIAR SIMULACIÓN
-</button>
-
-<p>Visualizaciones simuladas</p>
-<div class="counter" id="contador">0</div>
-<p id="status">Esperando solicitud...</p>
+<h2>Crear cuenta de prueba</h2>
+<input id="nombre" placeholder="Tu nombre">
+<button onclick="registrar()">Registrarme</button>
+<p id="mensaje"></p>
 </div>
 
-<footer>
-WILBER LIKER © 2026<br>
-Demostración: no genera visitas reales.
-</footer>
+<div class="panel">
+<h2>Nueva solicitud</h2>
+<input id="video" placeholder="Enlace de TikTok">
+<button onclick="solicitar()">Guardar solicitud</button>
+</div>
+
+<div class="panel">
+<h2>Historial</h2>
+<div id="historial">Todavía no hay solicitudes.</div>
+</div>
+<small>WILBER LIKER © 2026<br>
+Demo local: los datos no se guardan en un servidor y no genera vistas reales.</small>
 </main>
-
 <script>
-function simular(){
- const link=document.getElementById("link").value;
- const cantidad=Number(document.getElementById("cantidad").value);
- const contador=document.getElementById("contador");
- const status=document.getElementById("status");
+let usuario="";
+let solicitudes=[];
 
- if(!link.startsWith("https://")){
-   status.textContent="Introduce un enlace válido.";
-   return;
- }
-
- contador.textContent=Number(cantidad).toLocaleString("es-ES");
- status.textContent="Simulación completada. No se enviaron visitas reales.";
+function registrar(){
+ usuario=document.getElementById("nombre").value.trim();
+ if(!usuario){alert("Escribe tu nombre");return;}
+ document.getElementById("mensaje").textContent="¡Bienvenido, "+usuario+"!";
+}
+function solicitar(){
+ if(!usuario){alert("Primero crea tu cuenta de prueba");return;}
+ let video=document.getElementById("video").value.trim();
+ if(!video.startsWith("https://")){alert("Introduce un enlace válido");return;}
+ solicitudes.push(video);
+ document.getElementById("historial").innerHTML="";
+ solicitudes.forEach((v,i)=>{
+ let p=document.createElement("p");
+ p.textContent=(i+1)+". "+v;
+ document.getElementById("historial").appendChild(p);
+ });
+ document.getElementById("video").value="";
 }
 </script>
-
 </body>
 </html>
+
